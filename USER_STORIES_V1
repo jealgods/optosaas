@@ -1,0 +1,252 @@
+  1. Authentication & Role Management
+
+  US-1.1: User Login (S)
+  - As a user, I want to log in with my credentials so that I can access the system
+  - Acceptance: Email/password authentication, redirect based on role
+
+  US-1.2: Role-Based Access (M)
+  - As a system admin, I want users to have specific roles so that they only see relevant features
+  - Acceptance: Super Admin, Franchise Owner, Manager, Staff roles enforced
+
+  US-1.3: Multi-Branch Staff Access (M)
+  - As a staff member, I want to work at multiple branches so that I can cover different locations
+  - Acceptance: Staff can be assigned to multiple branches, switch between them
+
+  US-1.4: Professional Designation (S)
+  - As a staff member, I want my professional role (Optometrist/Dispenser) recorded so the system tracks my
+  specific metrics
+  - Acceptance: Staff can be marked as Optometrist, Dispenser, or both
+
+  US-1.5: Password Reset (S)
+  - As a user, I want to reset my password if forgotten so I can regain access
+  - Acceptance: Email-based password reset flow
+
+  US-1.6: Session Management (S)
+  - As a user, I want my session to persist reasonably but timeout for security
+  - Acceptance: Remember me option, automatic logout after inactivity
+
+  2. Franchise Management
+
+  US-2.1: Franchise Creation (M)
+  - As a super admin, I want to create new franchises so that I can onboard new clients
+  - Acceptance: Create franchise with name, contact details, subscription status
+
+  US-2.2: Branch Management (M)
+  - As a franchise owner, I want to manage multiple branches so I can track different locations
+  - Acceptance: Add/edit/delete branches with name, address, contact info
+
+  US-2.3: Branch Staff Assignment (S)
+  - As a franchise owner, I want to assign staff to branches so they can access relevant data
+  - Acceptance: Assign/remove staff from branches, view staff per branch
+
+  US-2.4: Franchise Switching (XS)
+  - As a super admin, I want to switch between franchises to support different clients
+  - Acceptance: Dropdown to switch context between franchises
+
+  US-2.5: Franchise Settings (S)
+  - As a franchise owner, I want to configure franchise-wide settings
+  - Acceptance: Update franchise details, preferences, working hours
+
+  3. Staff Performance & Analytics
+
+  US-3.1: Sales Dashboard Overview (L)
+  - As a franchise owner/manager, I want to see overall sales performance so I can track business health
+  - Acceptance: View total sales, conversion rates, revenue metrics with date filtering
+
+  US-3.2: Optometrist Leaderboard (M)
+  - As a manager, I want to see optometrist rankings so I can identify top performers
+  - Acceptance: Sort by same-day conversion, overall conversion, RPT
+
+  US-3.3: Dispenser Leaderboard (M)
+  - As a manager, I want to see dispenser rankings so I can track their performance
+  - Acceptance: Sort by OCT conversion, RPT, see team averages
+
+  US-3.4: Individual Optometrist Analysis (L)
+  - As a manager, I want detailed optometrist metrics so I can provide targeted coaching
+  - Acceptance: View test counts, conversion rates, revenue per test by date range
+
+  US-3.5: Individual Dispenser Analysis (XL)
+  - As a manager, I want comprehensive dispenser metrics so I can analyze their performance
+  - Acceptance: View dispense revenue, conversion rates, additional services, product breakdowns
+
+  US-3.6: Date Range Filtering (S)
+  - As a user, I want to filter analytics by date so I can analyze specific periods
+  - Acceptance: Calendar date pickers, preset ranges (today, week, month, year)
+
+  US-3.7: Branch Filtering (S)
+  - As a franchise owner, I want to filter data by branch so I can compare locations
+  - Acceptance: Dropdown to select single or multiple branches
+
+  US-3.8: Export Analytics (M)
+  - As a manager, I want to export performance data so I can create reports
+  - Acceptance: Export to CSV/Excel with all visible metrics
+
+  4. Patient Journey Management
+
+  US-4.1: Patient Entry Creation (XL)
+  - As a staff member, I want to record patient appointments so we track the full journey
+  - Acceptance: Create entry with patient ID, appointment details, services provided
+
+  US-4.2: Patient Search (M)
+  - As a staff member, I want to search patient entries so I can find specific records
+  - Acceptance: Search by patient ID, name, date, optometrist
+
+  US-4.3: Appointment Type Recording (S)
+  - As a staff member, I want to specify appointment types so we categorize correctly
+  - Acceptance: Select from Eye Check, CL Check, Medical Emergency, etc.
+
+  US-4.4: Clinical Services Tracking (L)
+  - As a staff member, I want to record clinical services so we track what was provided
+  - Acceptance: Record OCT booking, location, optometrist assignment
+
+  US-4.5: Appointment Outcomes (M)
+  - As an optometrist, I want to record appointment outcomes so we track results
+  - Acceptance: Select outcome (Rx given, No Rx, CL trial, etc.)
+
+  US-4.6: Contact Lens Journey (M)
+  - As a staff member, I want to track contact lens discussions and trials
+  - Acceptance: Record CL discussion, trial booking, follow-up appointments
+
+  US-4.7: Dispensing Process (L)
+  - As a dispenser, I want to record dispensing details so we track sales
+  - Acceptance: Record dispensing status, handover info, dispenser assignment
+
+  US-4.8: Multiple Lens Specifications (XL)
+  - As a dispenser, I want to record multiple lens pairs per patient so we capture all sales
+  - Acceptance: Add/remove lens specs dynamically, track type, brand, finishes
+
+  US-4.9: Financial Tracking (L)
+  - As a staff member, I want to record all payment types so we track revenue accurately
+  - Acceptance: Record glasses cover, OCT fees, appointment fees, accessories
+
+  US-4.10: NHS Voucher Management (M)
+  - As a dispenser, I want to track NHS vouchers so we handle reimbursements
+  - Acceptance: Record voucher values, calculate against transaction total
+
+  US-4.11: Collection Appointments (S)
+  - As a staff member, I want to schedule collection appointments so patients know when to return
+  - Acceptance: Set collection date/time when dispensing
+
+  US-4.12: PCSE Completion (S)
+  - As a staff member, I want to track PCSE form completion for NHS patients
+  - Acceptance: Mark PCSE as complete with date
+
+  US-4.13: Patient Entry Grid View (M)
+  - As a staff member, I want to see all patient entries in a table so I can review quickly
+  - Acceptance: Sortable/filterable grid with key information
+
+  US-4.14: Personal Performance Scorecard (L)
+  - As a staff member, I want to see my personal metrics so I track my performance
+  - Acceptance: View personal conversion rates, revenue metrics
+
+  US-4.15: Bulk Entry Updates (M)
+  - As a manager, I want to update multiple entries so I can correct data efficiently
+  - Acceptance: Select multiple entries, apply bulk actions
+
+  5. Appointment Outcomes Analysis
+
+  US-5.1: Outcomes Dashboard (L)
+  - As a manager, I want to analyze appointment outcomes so I understand patient flow
+  - Acceptance: View outcome breakdowns by type with percentages
+
+  US-5.2: Outcome Filtering (M)
+  - As a manager, I want to filter outcomes by various criteria so I can drill down
+  - Acceptance: Filter by branch, optometrist, date range, appointment type
+
+  US-5.3: Outcome Trends (M)
+  - As a manager, I want to see outcome trends over time so I identify patterns
+  - Acceptance: Line/bar charts showing outcome changes over time
+
+  6. User & Branch Administration
+
+  US-6.1: User Creation (M)
+  - As a franchise owner, I want to add new users so they can access the system
+  - Acceptance: Create user with email, name, role, branch assignment
+
+  US-6.2: User Editing (S)
+  - As a franchise owner, I want to edit user details so I keep information current
+  - Acceptance: Update user info, roles, branch assignments
+
+  US-6.3: User Deactivation (S)
+  - As a franchise owner, I want to deactivate users so they can't access when they leave
+  - Acceptance: Set user status to inactive, prevents login
+
+  US-6.4: Branch Creation (S)
+  - As a franchise owner, I want to add new branches as we expand
+  - Acceptance: Create branch with name, address, contact details
+
+  US-6.5: Branch Editing (S)
+  - As a franchise owner, I want to edit branch details so information stays current
+  - Acceptance: Update branch information
+
+  US-6.6: Branch Deactivation (S)
+  - As a franchise owner, I want to deactivate closed branches
+  - Acceptance: Set branch as inactive, hide from selections
+
+  7. Mobile Experience
+
+  US-7.1: Responsive Forms (L)
+  - As a mobile user, I want forms optimized for touch so I can enter data easily
+  - Acceptance: Touch-friendly inputs, appropriate keyboard types
+
+  US-7.2: Mobile Navigation (M)
+  - As a mobile user, I want easy navigation so I can access all features
+  - Acceptance: Mobile menu, swipe gestures where appropriate
+
+  US-7.3: Sticky Form Controls (S)
+  - As a mobile user, I want form controls accessible so I don't have to scroll constantly
+  - Acceptance: Save/cancel buttons stick to viewport
+
+  8. Data Management
+
+  US-8.1: Data Export (M)
+  - As a franchise owner, I want to export data so I can analyze externally
+  - Acceptance: Export patient entries, analytics to CSV/Excel
+
+  US-8.2: Data Import (L)
+  - As a franchise owner, I want to import historical data so we maintain continuity
+  - Acceptance: Import CSV with validation, error reporting
+
+  US-8.3: Data Backup (M)
+  - As a super admin, I want automatic backups so we don't lose data
+  - Acceptance: Daily automated backups, restore capability
+
+  9. Notifications & Alerts
+
+  US-9.1: Low Conversion Alerts (M)
+  - As a manager, I want alerts for low performance so I can intervene quickly
+  - Acceptance: Email/dashboard alerts when metrics fall below thresholds
+
+  US-9.2: System Notifications (S)
+  - As a user, I want to see important system messages
+  - Acceptance: In-app notifications for updates, maintenance
+
+  10. Integration Features
+
+  US-10.1: API for External Systems (XL)
+  - As a franchise owner, I want to integrate with our PMS so we avoid double entry
+  - Acceptance: REST API for patient data, appointments
+
+  US-10.2: Webhook Support (L)
+  - As a developer, I want webhooks for events so we can trigger external processes
+  - Acceptance: Configurable webhooks for key events
+
+  11. Reporting
+
+  US-11.1: Scheduled Reports (L)
+  - As a manager, I want automated reports so I stay informed without manual work
+  - Acceptance: Configure daily/weekly/monthly reports via email
+
+  US-11.2: Custom Report Builder (XL)
+  - As a franchise owner, I want to create custom reports so I can analyze specific metrics
+  - Acceptance: Drag-drop report builder with filters, grouping
+
+  12. Audit & Compliance
+
+  US-12.1: Audit Trail (L)
+  - As a franchise owner, I want to track all data changes for compliance
+  - Acceptance: Log all creates, updates, deletes with user and timestamp
+
+  US-12.2: Data Privacy Controls (M)
+  - As a franchise owner, I want to manage data retention for GDPR compliance
+  - Acceptance: Configure retention periods, automated data purgin

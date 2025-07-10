@@ -1,0 +1,234 @@
+  Authentication - Login Page (/login)
+
+  US-001: As a user, I can access the login page so that I can authenticate into the system.
+
+  US-002: As a user, I can enter my email and password on the login page so that I can securely log in.
+
+  US-003: As a user, I can click on quick login buttons for different roles (Super Admin, Franchise, Staff) on
+  the login page so that I can quickly access the system during development/testing.
+
+  US-004: As a user, I can see validation errors on the login page when I enter incorrect credentials so that I
+  know what went wrong.
+
+● Update Todos
+  ⎿  ☒ Write user stories for Authentication pages         
+     ☐ Write user stories for Super Admin pages
+     ☐ Write user stories for Franchise Owner/Manager pages
+     ☐ Write user stories for Staff pages
+
+● Super Admin - Dashboard (/super-admin)
+
+  US-005: As a Super Admin, I can view the Super Admin Dashboard page showing all franchises in the system so
+  that I can oversee the entire platform.
+
+  US-006: As a Super Admin, I can see a table of all franchises on the Super Admin Dashboard with columns for
+  Franchise Name, Owner Name, Email, Phone, Number of Branches, and Status so that I can manage franchise
+  accounts.
+
+  US-007: As a Super Admin, I can see the total count of franchises on the Super Admin Dashboard so that I know
+  how many customers are using the platform.
+
+● Update Todos
+  ⎿  ☒ Write user stories for Authentication pages         
+     ☒ Write user stories for Super Admin pages
+     ☐ Write user stories for Franchise Owner/Manager pages
+     ☐ Write user stories for Staff pages
+
+● Franchise - Dashboard (/franchise)
+
+  US-008: As a Franchise Owner/Manager, I can view the Franchise Dashboard page with performance leaderboards so
+  that I can monitor business performance.
+
+  US-009: As a Franchise Owner/Manager, I can filter the Franchise Dashboard by selecting specific branches using
+   a multi-select dropdown so that I can analyze branch-specific performance.
+
+  US-010: As a Franchise Owner/Manager, I can filter the Franchise Dashboard by date range using a date picker so
+   that I can analyze performance over specific time periods.
+
+  US-011: As a Franchise Owner/Manager, I can view the Optometrist Leaderboard on the Franchise Dashboard showing
+   staff ranked by Same Day and Overall conversion rates so that I can identify top performers.
+
+  US-012: As a Franchise Owner/Manager, I can view the Dispenser Leaderboard on the Franchise Dashboard showing
+  staff ranked by OCT conversion rates so that I can track dispensing performance.
+
+  US-013: As a Franchise Owner/Manager, I can view the Optometrist RPT (Revenue Per Test) Leaderboard on the
+  Franchise Dashboard so that I can monitor revenue generation efficiency.
+
+  US-014: As a Franchise Owner/Manager, I can view the Dispenser RPT Leaderboard on the Franchise Dashboard so
+  that I can track dispenser revenue performance.
+
+  Franchise - Users Management (/franchise/users)
+
+  US-015: As a Franchise Owner/Manager, I can view the Users page showing all franchise users in a table so that
+  I can manage team members.
+
+  US-016: As a Franchise Owner/Manager, I can see user details including Name, Email, Role, Branch Access, and
+  Status columns on the Users page so that I have complete user information.
+
+  US-017: As a Franchise Owner/Manager, I can click "Add User" button on the Users page to open a modal form so
+  that I can add new team members.
+
+  US-018: As a Franchise Owner/Manager, I can fill in user details (name, email, password, role, branch access)
+  in the Add User modal on the Users page so that I can create new user accounts.
+
+  US-019: As a Franchise Owner/Manager, I can assign a user as both Optometrist and Dispenser roles on the Users
+  page so that I can reflect their dual responsibilities.
+
+  US-020: As a Franchise Owner/Manager, I can assign multiple branches to a user on the Users page so that they
+  can work across locations.
+
+  US-021: As a Franchise Owner/Manager, I can click Edit button for any user on the Users page to modify their
+  information so that I can update user details.
+
+  US-022: As a Franchise Owner/Manager, I can click Delete button for any user on the Users page to remove them
+  from the system so that I can manage team changes.
+
+  Franchise - Branches Management (/franchise/branches)
+
+  US-023: As a Franchise Owner/Manager, I can view the Branches page showing all franchise branches in a table so
+   that I can manage locations.
+
+  US-024: As a Franchise Owner/Manager, I can see branch details including Branch Name, Address, City, Post Code,
+   Phone, and Status on the Branches page so that I have complete branch information.
+
+  US-025: As a Franchise Owner/Manager, I can click "Add Branch" button on the Branches page to open a modal form
+   so that I can add new locations.
+
+  US-026: As a Franchise Owner/Manager, I can fill in branch details (name, address, city, post code, phone) in
+  the Add Branch modal on the Branches page so that I can create new branch records.
+
+  US-027: As a Franchise Owner/Manager, I can click Edit button for any branch on the Branches page to modify
+  branch information so that I can update location details.
+
+  US-028: As a Franchise Owner/Manager, I can click Delete button for any branch on the Branches page to remove
+  it from the system so that I can manage branch closures.
+
+  Franchise - Optometrist Analysis (/franchise/optometrist-analysis)
+
+  US-029: As a Franchise Owner/Manager, I can view the Optometrist Analysis page with detailed performance
+  metrics so that I can analyze optometrist performance in depth.
+
+  US-030: As a Franchise Owner/Manager, I can filter the Optometrist Analysis page by branch and date range so
+  that I can focus on specific performance data.
+
+  Franchise - Dispenser Analysis (/franchise/dispenser-analysis)
+
+  US-031: As a Franchise Owner/Manager, I can view the Dispenser Analysis page with detailed performance metrics
+  so that I can analyze dispenser performance in depth.
+
+  US-032: As a Franchise Owner/Manager, I can filter the Dispenser Analysis page by branch and date range so that
+   I can focus on specific performance data.
+
+  Franchise - Appointment Outcomes (/franchise/appointment-outcomes)
+
+  US-033: As a Franchise Owner/Manager, I can view the Appointment Outcomes page showing outcome breakdowns by
+  appointment type so that I can track appointment effectiveness.
+
+  US-034: As a Franchise Owner/Manager, I can filter the Appointment Outcomes page by branch, optometrist, and
+  date range so that I can analyze specific appointment outcome patterns.
+
+  US-035: As a Franchise Owner/Manager, I can see appointment outcome data for different appointment types (Eye
+  Check Private/NHS/CLRS, CL Checks, Trials, Dilation, Medical Emergency) on the Appointment Outcomes page so
+  that I can understand service utilization.
+
+● Update Todos
+  ⎿  ☒ Write user stories for Authentication pages         
+     ☒ Write user stories for Super Admin pages
+     ☒ Write user stories for Franchise Owner/Manager pages
+     ☐ Write user stories for Staff pages
+
+● Staff - Dashboard (/staff/dashboard)
+
+  US-036: As a Staff member, I can view the Staff Dashboard page with two tabs (Patient Entries and Performance)
+  so that I can access my work areas.
+
+  US-037: As a Staff member, I can click on the Patient Entries tab on the Staff Dashboard to view and manage
+  patient appointment records so that I can track my patient interactions.
+
+  US-038: As a Staff member, I can see a grid of patient entries on the Patient Entries tab showing Date, Patient
+   Name, Appointment Type, Optometrist, Outcome, and Dispense Value so that I can review appointment history.
+
+  US-039: As a Staff member, I can filter patient entries by date range on the Patient Entries tab so that I can
+  find specific appointments.
+
+  US-040: As a Staff member, I can click on the Performance tab on the Staff Dashboard to view my personal
+  performance metrics so that I can track my progress.
+
+  US-041: As a Staff member, I can see my Same Day Conversion rate on the Performance tab so that I know my
+  immediate sales effectiveness.
+
+  US-042: As a Staff member, I can see my Overall Conversion rate on the Performance tab so that I understand my
+  total sales performance.
+
+  US-043: As a Staff member, I can see my Total Dispense Revenue on the Performance tab so that I know my revenue
+   contribution.
+
+  US-044: As a Staff member, I can see my Average Per Dispense on the Performance tab so that I understand my
+  average transaction value.
+
+  US-045: As a Staff member, I can see my CL (Contact Lens) Discussion Rate on the Performance tab so that I know
+   how often I discuss contact lenses with patients.
+
+  US-046: As a Staff member, I can see my CL Trial Booking Rate on the Performance tab so that I track my contact
+   lens trial conversion success.
+
+  US-047: As a Staff member, I can see my Total Appointment Revenue on the Performance tab so that I know my
+  appointment-based revenue generation.
+
+  US-048: As a Staff member, I can see my Revenue Per Test (RPT) on the Performance tab so that I understand my
+  revenue efficiency per appointment.
+
+  Staff - Add Patient (/staff/add-patient)
+
+  US-049: As a Staff member, I can access the Add Patient page to create new patient appointment records so that
+  I can document patient visits.
+
+  US-050: As a Staff member, I can enter patient identification details (Patient Name, NHS Number) on the Add
+  Patient page so that I can identify the patient.
+
+  US-051: As a Staff member, I can select appointment type (Walk-in or Pre-booked) on the Add Patient page so
+  that I can categorize the visit.
+
+  US-052: As a Staff member, I can specify appointment date and time on the Add Patient page so that I can record
+   when the visit occurred.
+
+  US-053: As a Staff member, I can indicate whether the patient is a New Patient or Existing Patient on the Add
+  Patient page so that I can track patient history.
+
+  US-054: As a Staff member, I can mark patient arrival status (DNAd or Arrived) on the Add Patient page so that
+  I can track attendance.
+
+  US-055: As a Staff member, I can select pre-screening options (Auto-Ref or NCT) on the Add Patient page so that
+   I can document preliminary tests.
+
+  US-056: As a Staff member, I can indicate if OCT was performed and enter the OCT fee on the Add Patient page so
+   that I can track additional services.
+
+  US-057: As a Staff member, I can select the optometrist who performed the test on the Add Patient page so that
+  I can assign responsibility.
+
+  US-058: As a Staff member, I can record appointment outcomes (Spectacles, Contact Lenses, Both, or Nothing
+  Dispensed) on the Add Patient page so that I can track sales results.
+
+  US-059: As a Staff member, I can select the dispenser and enter transaction values on the Add Patient page when
+   items are dispensed so that I can track sales data.
+
+  US-060: As a Staff member, I can add multiple lens specifications on the Add Patient page including Lens Type,
+  Index, Tint %, Coatings, and Add-ons so that I can document complete prescription details.
+
+  US-061: As a Staff member, I can enter NHS voucher type and value on the Add Patient page so that I can track
+  NHS subsidies.
+
+  US-062: As a Staff member, I can record payment details including Glasses Cover amount, OCT Fee, Appointment
+  Fee, and Accessories on the Add Patient page so that I can track all revenue streams.
+
+  US-063: As a Staff member, I can set a collection appointment date on the Add Patient page so that I can
+  schedule follow-ups.
+
+  US-064: As a Staff member, I can indicate if contact lens discussion occurred and if a trial was booked on the
+  Add Patient page so that I can track CL opportunities.
+
+  US-065: As a Staff member, I can save the patient appointment form on the Add Patient page so that the record
+  is stored in the system.
+
+

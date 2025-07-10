@@ -1,0 +1,350 @@
+// OptSaaS Entity Relationship Diagram for dbdiagram.io
+// Database Design for Optical/Optometry SaaS Platform
+
+Project OptSaaS {
+  database_type: 'PostgreSQL'
+  Note: 'Comprehensive optical/optometry SaaS platform for managing franchises, branches, staff, and patient appointments'
+}
+
+// ===== TABLES =====
+
+Table franchise {
+  id integer [pk, increment, note: 'Primary key']
+  name varchar(255) [not null, unique, note: 'Franchise name']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  updated_at timestamp [default: `now()`, note: 'Record update timestamp']
+  
+  Note: 'Central franchise organizations that own multiple branch locations'
+}
+
+Table branch {
+  id integer [pk, increment, note: 'Primary key']
+  name varchar(255) [not null, note: 'Branch name']
+  franchise_id integer [not null, ref: > franchise.id, note: 'Foreign key to franchise']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  updated_at timestamp [default: `now()`, note: 'Record update timestamp']
+  
+  indexes {
+    franchise_id [name: 'idx_branch_franchise']
+  }
+  
+  Note: 'Individual optical store locations within a franchise network'
+}
+
+Table user {
+  id integer [pk, increment, note: 'Primary key']
+  name varchar(255) [not null, note: 'User full name']
+  email varchar(255) [not null, unique, note: 'User email address']
+  role varchar(20) [not null, note: 'User role: super_admin, owner, manager, staff']
+  franchise_id integer [ref: > franchise.id, note: 'Foreign key to franchise (NULL for super_admin)']
+  is_dispenser boolean [default: false, note: 'Whether user is a dispenser']
+  is_optometrist boolean [default: false, note: 'Whether user is an optometrist']
+  status varchar(20) [default: 'active', note: 'User status: active, inactive']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  updated_at timestamp [default: `now()`, note: 'Record update timestamp']
+  
+  indexes {
+    email [name: 'idx_user_email']
+    franchise_id [name: 'idx_user_franchise']
+    role [name: 'idx_user_role']
+  }
+  
+  Note: 'System users including optometrists, dispensers, managers, and administrators'
+}
+
+Table user_branch_access {
+  user_id integer [pk, ref: > user.id, note: 'Foreign key to user']
+  branch_id integer [pk, ref: > branch.id, note: 'Foreign key to branch']
+  granted_at timestamp [default: `now()`, note: 'Access grant timestamp']
+  granted_by integer [ref: > user.id, note: 'User who granted access']
+  
+  indexes {
+    branch_id [name: 'idx_branch_users']
+  }
+  
+  Note: 'Junction table managing which branches each user can access'
+}
+
+Table patient_appointment {
+  ops_patient_identifier varchar(50) [pk, note: 'External patient identifier (Primary key)']
+  appointment_date date [not null, note: 'Date of appointment']
+  appointment_type_id integer [ref: > appointment_types.id, note: 'Foreign key to appointment type']
+  appointment_type varchar(50) [not null, note: 'Type of appointment (denormalized)']
+  nhs_reason_id integer [ref: > nhs_reasons.id, note: 'Foreign key to NHS reason']
+  nhs_reason varchar(100) [note: 'NHS appointment reason (denormalized)']
+  arrival_status_id integer [ref: > arrival_statuses.id, note: 'Foreign key to arrival status']
+  arrival_status varchar(50) [note: 'Patient arrival status (denormalized)']
+  pre_screener_id integer [ref: > user.id, note: 'Pre-screener user ID']
+  oct_option_id integer [ref: > oct_options.id, note: 'Foreign key to OCT option']
+  oct varchar(50) [note: 'OCT scan status (denormalized)']
+  oct_booking_location_id integer [ref: > oct_booking_locations.id, note: 'Foreign key to OCT booking location']
+  where_was_oct_booked varchar(100) [note: 'OCT booking location (denormalized)']
+  optometrist_id integer [ref: > user.id, note: 'Optometrist user ID']
+  appointment_outcome_type_id integer [ref: > appointment_outcome_types.id, note: 'Foreign key to appointment outcome type']
+  appointment_outcome varchar(100) [note: 'Outcome of appointment (denormalized)']
+  did_optom_advise_new varchar(50) [note: 'New glasses advised']
+  did_optom_discuss_cls varchar(50) [note: 'Contact lenses discussed']
+  did_px_book_trial varchar(50) [note: 'Trial booked']
+  dispensing_status_id integer [ref: > dispensing_statuses.id, note: 'Foreign key to dispensing status']
+  did_patient_dispense varchar(50) [note: 'Patient dispensed (denormalized)']
+  handover varchar(255) [note: 'Handover notes']
+  dispenser_id integer [ref: > user.id, note: 'Dispenser user ID']
+  glasses_cover_amount_paid decimal(10,2) [default: 0, note: 'Glasses cover payment']
+  oct_fee_amount_paid decimal(10,2) [default: 0, note: 'OCT fee payment']
+  appt_fee_amount_paid decimal(10,2) [default: 0, note: 'Appointment fee payment']
+  accessories_amount_paid decimal(10,2) [default: 0, note: 'Accessories payment']
+  nhs_voucher varchar(50) [note: 'NHS voucher number']
+  nhs_voucher_type_id integer [ref: > nhs_voucher_types.id, note: 'Foreign key to NHS voucher type']
+  nhs_voucher_type varchar(50) [note: 'NHS voucher type (denormalized)']
+  nhs_voucher_value decimal(10,2) [default: 0, note: 'NHS voucher value']
+  dispense_amount_paid decimal(10,2) [default: 0, note: 'Dispense payment']
+  transaction_value decimal(10,2) [default: 0, note: 'Total transaction value']
+  ops_transaction_id varchar(50) [unique, note: 'External transaction ID']
+  collection_appointment_booked varchar(50) [note: 'Collection appointment status']
+  pcse_completed varchar(50) [note: 'PCSE completion status']
+  branch_id integer [not null, ref: > branch.id, note: 'Branch ID']
+  franchise_id integer [not null, ref: > franchise.id, note: 'Franchise ID']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  updated_at timestamp [default: `now()`, note: 'Record update timestamp']
+  
+  indexes {
+    appointment_date [name: 'idx_appointment_date']
+    branch_id [name: 'idx_appointment_branch']
+    franchise_id [name: 'idx_appointment_franchise']
+    optometrist_id [name: 'idx_appointment_optometrist']
+    dispenser_id [name: 'idx_appointment_dispenser']
+    appointment_type_id [name: 'idx_appointment_type']
+    appointment_outcome_type_id [name: 'idx_appointment_outcome']
+    nhs_reason_id [name: 'idx_nhs_reason']
+    arrival_status_id [name: 'idx_arrival_status']
+    oct_option_id [name: 'idx_oct_option']
+    oct_booking_location_id [name: 'idx_oct_booking_location']
+    nhs_voucher_type_id [name: 'idx_nhs_voucher_type']
+    dispensing_status_id [name: 'idx_dispensing_status']
+  }
+  
+  Note: 'Core entity tracking patient visits, clinical data, and financial transactions'
+}
+
+Table lens_specification {
+  id integer [pk, increment, note: 'Primary key']
+  ops_patient_identifier varchar(50) [not null, ref: > patient_appointment.ops_patient_identifier, note: 'Patient appointment reference']
+  eye varchar(10) [not null, note: 'Eye: right, left, both']
+  lens_manufacturer_id integer [ref: > lens_manufacturers.id, note: 'Foreign key to lens manufacturer']
+  lens_manufacturer varchar(100) [note: 'Lens manufacturer name (denormalized)']
+  lens_type_id integer [ref: > lens_types.id, note: 'Foreign key to lens type']
+  lens_type varchar(100) [note: 'Type of lens (denormalized)']
+  lens_index_id integer [ref: > lens_indexes.id, note: 'Foreign key to lens index']
+  lens_index varchar(20) [note: 'Lens index (denormalized)']
+  lens_name_id integer [ref: > lens_names.id, note: 'Foreign key to lens name']
+  lens_name varchar(100) [note: 'Lens product name (denormalized)']
+  lens_finish_id integer [ref: > lens_finishes.id, note: 'Foreign key to lens finish']
+  lens_finish varchar(100) [note: 'Lens finish/coating (denormalized)']
+  lens_tint_id integer [ref: > lens_tints.id, note: 'Foreign key to lens tint']
+  lens_tint varchar(100) [note: 'Lens tint specification (denormalized)']
+  glasses_cover varchar(50) [note: 'Glasses cover type']
+  dispense_value decimal(10,2) [default: 0, note: 'Dispense value']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  indexes {
+    ops_patient_identifier [name: 'idx_lens_patient']
+    lens_manufacturer_id [name: 'idx_lens_manufacturer']
+    lens_type_id [name: 'idx_lens_type']
+    lens_index_id [name: 'idx_lens_index']
+    lens_name_id [name: 'idx_lens_name']
+    lens_finish_id [name: 'idx_lens_finish']
+    lens_tint_id [name: 'idx_lens_tint']
+  }
+  
+  Note: 'Detailed lens prescription and specification data for each patient appointment'
+}
+
+
+
+// ===== REFERENCE TABLES =====
+
+Table appointment_types {
+  id integer [pk, increment, note: 'Primary key']
+  type_code varchar(50) [not null, unique, note: 'Appointment type code']
+  type_name varchar(100) [not null, note: 'Appointment type display name']
+  description text [note: 'Detailed description']
+  duration_minutes integer [default: 30, note: 'Standard appointment duration']
+  is_active boolean [default: true, note: 'Whether type is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for appointment types from patient entry form: Eye Check Private, Eye Check NHS, CL Check Private, etc.'
+}
+
+Table appointment_outcome_types {
+  id integer [pk, increment, note: 'Primary key']
+  outcome_code varchar(50) [not null, unique, note: 'Outcome code']
+  outcome_name varchar(100) [not null, note: 'Outcome display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether outcome is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for appointment outcomes from patient entry form: Change in Rx, No Rx, Stable Rx, Referred, Needs Dilation'
+}
+
+Table nhs_reasons {
+  id integer [pk, increment, note: 'Primary key']
+  reason_code varchar(50) [not null, unique, note: 'NHS reason code']
+  reason_name varchar(100) [not null, note: 'NHS reason display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether reason is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for NHS eligibility reasons: Under 16, Over 60, 16-18 FTE, Diabetic, FHG, Financial Help'
+}
+
+Table arrival_statuses {
+  id integer [pk, increment, note: 'Primary key']
+  status_code varchar(50) [not null, unique, note: 'Arrival status code']
+  status_name varchar(100) [not null, note: 'Arrival status display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether status is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for patient arrival status: Arrived, Failed to Attend, Cancelled, Rescheduled'
+}
+
+Table oct_options {
+  id integer [pk, increment, note: 'Primary key']
+  option_code varchar(50) [not null, unique, note: 'OCT option code']
+  option_name varchar(100) [not null, note: 'OCT option display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether option is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for OCT service options: Yes, No, N/A, Clinical, Free, Staff'
+}
+
+Table oct_booking_locations {
+  id integer [pk, increment, note: 'Primary key']
+  location_code varchar(50) [not null, unique, note: 'OCT booking location code']
+  location_name varchar(100) [not null, note: 'OCT booking location display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether location is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for OCT booking locations: In Store, By Calls Hub'
+}
+
+Table nhs_voucher_types {
+  id integer [pk, increment, note: 'Primary key']
+  voucher_code varchar(10) [not null, unique, note: 'NHS voucher code']
+  voucher_name varchar(100) [not null, note: 'NHS voucher display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether voucher type is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for NHS voucher categories: A, B, C, D, E, F, G, H, I (HES), J'
+}
+
+Table dispensing_statuses {
+  id integer [pk, increment, note: 'Primary key']
+  status_code varchar(50) [not null, unique, note: 'Dispensing status code']
+  status_name varchar(100) [not null, note: 'Dispensing status display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether status is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for patient dispensing decisions: Yes, Declined Update, Coming Back, Further Apt Required, Taken Rx, Other, No'
+}
+
+Table lens_indexes {
+  id integer [pk, increment, note: 'Primary key']
+  index_code varchar(50) [not null, unique, note: 'Lens index code']
+  index_name varchar(100) [not null, note: 'Lens index display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether index is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for lens thickness/index options: Standard, Thin, Ultrathin, Ultrathin Plus'
+}
+
+Table lens_names {
+  id integer [pk, increment, note: 'Primary key']
+  name_code varchar(50) [not null, unique, note: 'Lens name code']
+  name_display varchar(100) [not null, note: 'Lens name display']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether name is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for specific lens product names: Standard, Thin, Ultrathin, UltrathinPlus'
+}
+
+Table lens_finishes {
+  id integer [pk, increment, note: 'Primary key']
+  finish_code varchar(50) [not null, unique, note: 'Lens finish code']
+  finish_name varchar(100) [not null, note: 'Lens finish display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether finish is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for lens finish/coating options: Standard, Scratch Resistant, Protect, ProtectPlus, UVBlue, Eyedrive'
+}
+
+Table lens_tints {
+  id integer [pk, increment, note: 'Primary key']
+  tint_code varchar(50) [not null, unique, note: 'Lens tint code']
+  tint_name varchar(100) [not null, note: 'Lens tint display name']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether tint is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for lens tinting options: None, Sun, Transitions, Polarised'
+}
+
+Table lens_manufacturers {
+  id integer [pk, increment, note: 'Primary key']
+  manufacturer_code varchar(50) [not null, unique, note: 'Manufacturer code']
+  manufacturer_name varchar(100) [not null, note: 'Manufacturer display name']
+  website varchar(255) [note: 'Manufacturer website']
+  contact_info text [note: 'Contact information']
+  is_active boolean [default: true, note: 'Whether manufacturer is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for available lens brands and manufacturers: Boots, Essilor, Zeiss, Norville, Bolle, MCR, Corporate'
+}
+
+Table lens_types {
+  id integer [pk, increment, note: 'Primary key']
+  type_code varchar(50) [not null, unique, note: 'Lens type code']
+  type_name varchar(100) [not null, note: 'Lens type display name']
+  category varchar(50) [note: 'Category: single_vision, bifocal, varifocal']
+  description text [note: 'Detailed description']
+  is_active boolean [default: true, note: 'Whether type is currently available']
+  created_at timestamp [default: `now()`, note: 'Record creation timestamp']
+  
+  Note: 'Reference table for lens types: Single Vision, Bifocal, Vfocal, Office'
+}
+
+
+
+// ===== ENUMS =====
+
+Enum user_role {
+  super_admin
+  owner
+  manager
+  staff
+}
+
+Enum user_status {
+  active
+  inactive
+}
+
+Enum eye_type {
+  right
+  left
+  both
+}
+
+Enum lens_category {
+  single_vision
+  bifocal
+  varifocal
+}
+
