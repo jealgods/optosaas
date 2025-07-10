@@ -59,7 +59,7 @@ export function FranchiseNavbar({ userRole, userName }: FranchiseNavbarProps) {
 
   return (
     <header className="border-b bg-white sticky top-0 z-30">
-      <div className="relative max-w-7xl mx-auto flex h-16 items-center px-2 md:px-4 lg:px-8">
+      <div className="relative flex h-16 items-center justify-between px-2 md:px-4 lg:px-8">
         {/* Logo */}
         <Link
           href="/franchise"
@@ -69,7 +69,7 @@ export function FranchiseNavbar({ userRole, userName }: FranchiseNavbarProps) {
         </Link>
 
         {/* Desktop Navigation (xl and up) */}
-        <nav className="hidden xl:flex flex-1 min-w-0 justify-center pl-2 pr-2">
+        <nav className="hidden xl:flex min-w-0 pl-2 pr-2">
           <NavigationMenu>
             <NavigationMenuList className="gap-x-4 overflow-x-auto scrollbar-hide">
               {navItems.map((item) => (
@@ -92,7 +92,7 @@ export function FranchiseNavbar({ userRole, userName }: FranchiseNavbarProps) {
         </nav>
 
         {/* User info and logout (xl and up) */}
-        <div className="hidden sm:flex gap-4  items-center space-x-2 ml-auto flex-shrink-0 ">
+        <div className="hidden sm:flex items-center space-x-2 ml-auto flex-shrink-0 ">
           <div className="xl:hidden">
             <Select
               value={pathname}
