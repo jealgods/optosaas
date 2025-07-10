@@ -164,7 +164,7 @@ export default function AppointmentOutcomesPage() {
   return (
     <div className="space-y-4">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-3xl font-semibold tracking-tight pb-1">
           Appointment Outcomes
         </h1>
         <p className="text-muted-foreground">
